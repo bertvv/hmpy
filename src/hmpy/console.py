@@ -12,9 +12,6 @@ from . import get_os_language
 # article.
 API_URL = "https://%s.wikipedia.org/api/rest_v1/page/random/summary"
 
-@click.command()
-@click.version_option(version=__version__)
-@click.option("-l", "--language", default=get_os_language(), help=("Choose language (default: %s)" % get_os_language()))
 
 def get_random_summary(language="en"):
     """Get a random Wikipedia article summary in the specified language"""
@@ -43,7 +40,9 @@ def get_random_summary(language="en"):
         click.echo("Unable to process the request.")
         raise SystemExit(re)
 
-
+@click.command()
+@click.version_option(version=__version__)
+@click.option("-l", "--language", default=get_os_language(), help=("Choose language (default: %s)" % get_os_language()))
 def main():
     """Show the summary of a random Wikipedia article."""
     get_random_summary()
